@@ -6,25 +6,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* BODY */
 body{
   margin:0;
   font-family:'Inter', sans-serif;
-  background:#020617;
   color:white;
+  background:
+  radial-gradient(circle at 20% 20%, rgba(59,91,255,0.15), transparent),
+  radial-gradient(circle at 80% 80%, rgba(0,255,136,0.08), transparent),
+  #020617;
 }
 
 /* NAV */
 nav{
+  position:fixed;
+  width:100%;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:20px 60px;
-}
-
-.nav-right{
-  display:flex;
-  align-items:center;
-  gap:30px;
+  background:rgba(2,6,23,0.7);
+  backdrop-filter:blur(10px);
+  z-index:1000;
 }
 
 nav ul{
@@ -35,6 +38,21 @@ nav ul{
 
 nav li{
   cursor:pointer;
+  position:relative;
+}
+
+nav li::after{
+  content:"";
+  position:absolute;
+  bottom:-5px;
+  width:0;
+  height:2px;
+  background:#3b5bff;
+  transition:0.3s;
+}
+
+nav li:hover::after{
+  width:100%;
 }
 
 .join{
@@ -47,144 +65,112 @@ nav li{
 
 /* HERO */
 .hero{
-  height:80vh;
+  height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
 }
 
 .hero h1{
   font-size:90px;
-  font-weight:900;
   opacity:0;
-  transform:translateY(-100px) scale(0.9);
-  animation:heroIn 1s ease forwards;
+  transform:translateY(-100px);
+  animation:hero 1s forwards;
 }
 
-.hero p{
-  opacity:0;
-  transform:translateY(-50px);
-  animation:heroText 1.2s ease forwards;
+@keyframes hero{
+  to{opacity:1; transform:translateY(0);}
 }
 
-@keyframes heroIn{
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-}
-
-@keyframes heroText{
-  to{
-    opacity:0.6;
-    transform:translateY(0);
-  }
-}
-
-/* PNR GRADIENT */
 .pnr{
   background:linear-gradient(90deg,#3b5bff,#00ff88);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-/* INFO */
-.info{
+/* SWITCH */
+.switch{
   display:flex;
-  justify-content:space-between;
-  padding:100px;
-}
-
-.info-left{
-  max-width:500px;
-}
-
-.info-left h2{
-  font-size:50px;
-}
-
-.info-right{
-  font-size:60px;
-  font-weight:900;
-}
-
-/* TEAM SECTION */
-.team-section{
-  background:white;
-  color:black;
-  padding:120px 20px;
-  text-align:center;
-}
-
-/* MAIN TEAM TITLE */
-.team-title{
-  font-family:'Oswald', sans-serif;
-  font-size:60px;
-  margin-bottom:40px;
-  letter-spacing:2px;
-}
-
-/* SUB TITLES */
-.sub-title{
-  font-family:'Oswald', sans-serif;
-  font-size:28px;
-  margin:60px 0 30px;
-}
-
-/* GRID */
-.team-grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:25px;
   justify-content:center;
+  gap:20px;
+  margin-bottom:40px;
 }
 
-/* BOX */
-.team-box{
-  width:280px;
-  padding:25px;
-  background:#f1f5f9;
-  border-radius:12px;
-  text-align:left;
-  transition:0.25s;
+.switch button{
+  padding:10px 25px;
+  border:none;
+  background:#111827;
+  color:white;
+  cursor:pointer;
+  border-radius:6px;
 }
 
-.team-box:hover{
-  transform:translateY(-6px) scale(1.03);
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+.active{
+  background:linear-gradient(90deg,#3b5bff,#00ff88);
 }
 
-.team-box h3{
-  font-size:20px;
-}
-
-/* DRIVER */
-.driver{
-  margin-top:8px;
-  opacity:0.7;
-}
-
-/* TAG */
-.tag{
-  margin-top:15px;
-  display:inline-block;
-  font-size:11px;
-  padding:4px 10px;
-  border:1px solid #bbb;
-}
-
-/* CONTACT */
-section{
+/* TEAM */
+.team-section{
   padding:100px 20px;
   text-align:center;
 }
 
-.btn{
-  padding:12px 25px;
-  background:#3b5bff;
-  color:white;
-  text-decoration:none;
+.team-title{
+  font-family:'Oswald';
+  font-size:60px;
+}
+
+.team-grid{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.team-box{
+  width:260px;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.team-box:hover{
+  transform:translateY(-5px) scale(1.03);
+  box-shadow:0 0 30px rgba(59,91,255,0.4);
+}
+
+.tag{
+  margin-top:10px;
+  border:1px solid white;
+  padding:3px 8px;
+  font-size:11px;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-box{
+  background:#111827;
+  padding:40px;
+  border-radius:10px;
+}
+
+.close{
+  cursor:pointer;
+  margin-top:20px;
 }
 
 /* FOOTER */
@@ -197,15 +183,14 @@ footer{
 footer a{
   display:block;
   color:white;
-  text-decoration:none;
   opacity:0.6;
+  text-decoration:none;
 }
 
 footer a:hover{
   opacity:1;
 }
 
-/* JS SCROLL */
 </style>
 </head>
 
@@ -214,7 +199,7 @@ footer a:hover{
 <nav>
 <div><b>PNR MOTORSPORT</b></div>
 
-<div class="nav-right">
+<div style="display:flex;gap:30px;align-items:center;">
 <a class="join" href="https://discord.gg/TXhqstemqD">JOIN NOW</a>
 
 <ul>
@@ -227,20 +212,8 @@ footer a:hover{
 
 <!-- HERO -->
 <div class="hero" id="home">
-  <h1><span class="pnr">PNR</span> MOTORSPORT</h1>
-  <p>Simracing Team</p>
-</div>
-
-<!-- INFO -->
-<div class="info">
-<div class="info-left">
-<h2>INFO</h2>
-<p>
-We are a growing simracing team founded in 2026, competing in 
-Assetto Corsa Competizione and Le Mans Ultimate.
-</p>
-</div>
-<div class="info-right">PNR MOTORSPORT</div>
+<h1><span class="pnr">PNR</span> MOTORSPORT</h1>
+<p>Simracing Team</p>
 </div>
 
 <!-- TEAM -->
@@ -248,61 +221,26 @@ Assetto Corsa Competizione and Le Mans Ultimate.
 
 <h2 class="team-title">TEAM</h2>
 
-<h3 class="sub-title">Assetto Corsa Competizione</h3>
-<div class="team-grid">
-
-<div class="team-box">
-<h3>Team 1</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
+<div class="switch">
+<button class="active" onclick="switchGame('acc')">ACC</button>
+<button onclick="switchGame('lmu')">LMU</button>
 </div>
 
-<div class="team-box">
-<h3>Team 2</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
+<div id="acc" class="team-grid">
 
-<div class="team-box">
-<h3>Team 3</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
-
-<div class="team-box">
-<h3>Team 4 [Academy]</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
+<div class="team-box" onclick="openPopup('ACC Team 1')">Team 1<div class="tag">GT3</div></div>
+<div class="team-box" onclick="openPopup('ACC Team 2')">Team 2<div class="tag">GT3</div></div>
+<div class="team-box" onclick="openPopup('ACC Team 3')">Team 3<div class="tag">GT3</div></div>
+<div class="team-box" onclick="openPopup('ACC Academy')">Team 4 [Academy]<div class="tag">GT3</div></div>
 
 </div>
 
-<h3 class="sub-title">Le Mans Ultimate</h3>
-<div class="team-grid">
+<div id="lmu" class="team-grid" style="display:none;">
 
-<div class="team-box">
-<h3>Team 1</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
-
-<div class="team-box">
-<h3>Team 2</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
-
-<div class="team-box">
-<h3>Team 3</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
-
-<div class="team-box">
-<h3>Team 4 [Academy]</h3>
-<div class="driver">-</div><div class="driver">-</div><div class="driver">-</div><div class="driver">-</div>
-<div class="tag">GT3</div>
-</div>
+<div class="team-box" onclick="openPopup('LMU Team 1')">Team 1<div class="tag">GT3</div></div>
+<div class="team-box" onclick="openPopup('LMU Team 2')">Team 2<div class="tag">GT3</div></div>
+<div class="team-box" onclick="openPopup('LMU Team 3')">Team 3<div class="tag">GT3</div></div>
+<div class="team-box" onclick="openPopup('LMU Academy')">Team 4 [Academy]<div class="tag">GT3</div></div>
 
 </div>
 
@@ -311,7 +249,7 @@ Assetto Corsa Competizione and Le Mans Ultimate.
 <!-- CONTACT -->
 <section id="contact">
 <h2>CONTACT</h2>
-<a class="btn" href="https://discord.gg/TXhqstemqD">JOIN DISCORD</a>
+<a href="https://discord.gg/TXhqstemqD">JOIN DISCORD</a>
 </section>
 
 <!-- FOOTER -->
@@ -319,8 +257,8 @@ Assetto Corsa Competizione and Le Mans Ultimate.
 <div>
 <h3>Social</h3>
 <a href="https://discord.gg/TXhqstemqD">Discord</a>
-<a href="https://www.instagram.com/pnrmotorsport2026/">Instagram</a>
-<a href="https://www.tiktok.com/@gt3hub_motorsport">TikTok</a>
+<a href="#">Instagram</a>
+<a href="#">TikTok</a>
 </div>
 
 <div>
@@ -329,10 +267,40 @@ Assetto Corsa Competizione and Le Mans Ultimate.
 </div>
 </footer>
 
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<h2 id="popupTitle"></h2>
+<p>Driver info coming soon...</p>
+<div class="close" onclick="closePopup()">Close</div>
+</div>
+</div>
+
 <script>
+
 function go(id){
 document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
+
+/* SWITCH */
+function switchGame(game){
+document.getElementById('acc').style.display = game === 'acc' ? 'flex':'none';
+document.getElementById('lmu').style.display = game === 'lmu' ? 'flex':'none';
+
+document.querySelectorAll('.switch button').forEach(btn=>btn.classList.remove('active'));
+event.target.classList.add('active');
+}
+
+/* POPUP */
+function openPopup(title){
+document.getElementById('popup').style.display='flex';
+document.getElementById('popupTitle').innerText=title;
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none';
+}
+
 </script>
 
 </body>
